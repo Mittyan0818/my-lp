@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cut">
+<meta name="robots" content="noindex,nofollow">
+<title>test</title>
+<script id="lp-config" type="application/json">{"blur":false,"blurStrength":6,"likes":1900,"unblurText":"ぼかしを外して見る","ctaRepeatSec":10,"regOn":true,"regText":"登録する","regUrl":"","cbarOn":true,"cbarPlaceholder":"コメントする…","cbarTitle":"コメントするには登録が必要です","cbarDesc":"登録すると、配信者にコメントやいいねを送れるようになります。","cbarGo":"登録してコメントする","yesText":"はい","noText":"いいえ","commentsOn":true,"commentsInterval":2.2,"comments":[{"user":"たくみ","text":"{name}ちゃんかわいすぎる…"},{"user":"ゆうすけ","text":"DMで動画もらえた！さいこー","highlight":true},{"user":"りょう","text":"{name}ちゃん見てるだけで癒やされる"},{"user":"けんた","text":"{name}ちゃん今日も可愛い♡"},{"user":"ハル","text":"声聞きたい"},{"user":"まさ","text":"待ってた！"},{"user":"のぞみ","text":"テンション上がる〜"},{"user":"よう","text":"めっちゃ良い"},{"user":"しょう","text":"ガチで神回"},{"user":"こう","text":"寝れなくなるやつ"},{"user":"だいき","text":"やばい、ずっと見てられる"},{"user":"ゆうた","text":"この表情反則"},{"user":"しんや","text":"通知きた瞬間に来た"},{"user":"ともき","text":"癒やしすぎる…"},{"user":"あつし","text":"神回確定"},{"user":"はると","text":"サムネ詐欺じゃなくて安心した"},{"user":"そうた","text":"顔面偏差値高すぎ"},{"user":"れん","text":"もっと見たい"},{"user":"あおい","text":"肌きれい！"},{"user":"ゆうき","text":"時間溶けるw"},{"user":"こうた","text":"これ無料でいいの？"},{"user":"しゅんすけ","text":"初コメです！よろしく","highlight":true},{"user":"たつや","text":"通知切ってない正解だった"},{"user":"まさき","text":"今日も見つけた！"},{"user":"ひろ","text":"ずっと応援してます"},{"user":"けい","text":"BGMも最高"},{"user":"しょうた","text":"動き好き"},{"user":"あきら","text":"笑顔やばい"},{"user":"みなと","text":"{name}ちゃんこの表情ずるい"},{"user":"りく","text":"推せる"},{"user":"いつき","text":"癖になる…"},{"user":"はやと","text":"ちょっとドキッとした"},{"user":"ふみや","text":"ガチで癒やし"},{"user":"こうせい","text":"更新楽しみにしてます"},{"user":"のぶ","text":"刺さる"},{"user":"しょうご","text":"何回でも見れる"},{"user":"けんじ","text":"テンプレじゃないのが良い"},{"user":"まなと","text":"ずっと見てても飽きない"},{"user":"ゆずき","text":"待ってたよ〜！"},{"user":"えいた","text":"{name}ちゃんに会いたい"},{"user":"ともや","text":"最近ハマってます"},{"user":"かずき","text":"声出てないの惜しい"},{"user":"ひでき","text":"今日のコーデも可愛い"},{"user":"としき","text":"寝る前の楽しみ"},{"user":"ゆうご","text":"やばい、やばい"},{"user":"さとし","text":"会員登録してきた！後悔なし","highlight":true},{"user":"ようすけ","text":"{name}ちゃん初めて見たけど最高"},{"user":"あきと","text":"もう何回目か分からん"},{"user":"だいすけ","text":"いつもありがとう！"},{"user":"ゆう","text":"限界オタクです"}],"title":"test","tags":["新着","サンプル"],"heading":"専用アプリで配信を視聴しますか？","description":"はいを押すと、専用アプリに遷移します。通信環境をご確認の上お進みください。","ctaText":"アプリで続きを視聴する","ctaUrl":"","ctaDelaySec":3,"ageGate":false,"footerNote":"※本ページはアフィリエイト広告を含みます。出演者は全員18歳以上で、同意のもと撮影されています。","pageUrl":"https://mittyan0818.github.io/my-lp/snaptik_7692043512132422933_v3/","clips":[{"video":"video-0.mp4","videoBlur":"video-0.blur-6.mp4","name":"","avatar":"thumb-0.jpg"}],"video":"video-0.mp4","videoBlur":"video-0.blur-6.mp4","avatar":"thumb-0.jpg"}</script>
+<style>
+  :root {
+    --bg: #0b0b0f;
+    --fg: #fff;
+    --muted: rgba(255,255,255,.72);
+    --pink: #ff4fa0;
+    --pink-glow: rgba(255,79,160,.45);
+    --chip-red: #ff2d55;
+    --chip-blue: #2f7bff;
+    --glass: rgba(20,20,26,.55);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: var(--bg); color: var(--fg);
+    font-family: "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  body { overflow: hidden; }
+  button { font: inherit; color: inherit; border: 0; background: none; cursor: pointer; }
+  [hidden] { display: none !important; }
+
+  /* ===== スマホ表示 ===== */
+  #sp { position: fixed; inset: 0; overflow: hidden; }
+  .media { position: absolute; inset: 0; overflow: hidden; background: #000; }
+  .media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none;
+    -webkit-touch-callout: none; user-select: none; }
+  /* ブラウザ側でぼかす場合、端が透けないよう少し拡大する */
+  .media video.css-blur { transform: scale(1.12); }
+  /* 複数動画：縦スクロールフィード */
+  .feed { position: absolute; inset: 0; z-index: 1; overflow-y: scroll; scroll-snap-type: y mandatory; -webkit-overflow-scrolling: touch; }
+  .feed::-webkit-scrollbar { width: 0; height: 0; }
+  .slide { position: relative; height: 100%; width: 100%; scroll-snap-align: start; scroll-snap-stop: always; overflow: hidden; background: #000; }
+  .slide video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+  .slide video.css-blur { transform: scale(1.12); }
+  .cta-slide { background: radial-gradient(circle at 50% 35%, #1a0e18, #0b0b0f 72%); display: grid; place-items: center; padding: 0 20px; }
+  .shade { position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.05) 25%, rgba(0,0,0,.05) 60%, rgba(0,0,0,.7) 100%); }
+  .feed-mode .shade { background: linear-gradient(180deg, rgba(0,0,0,.5) 0%, transparent 22%, transparent 78%, rgba(0,0,0,.6) 100%); }
+
+  /* ---------- 画面上部 ---------- */
+  /* 上端に薄い黒グラデを置いて、名前・LIVEを読みやすくする */
+  #sp::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 180px; pointer-events: none;
+    background: linear-gradient(180deg, rgba(0,0,0,.55), transparent); }
+  .top { position: absolute; left: 0; right: 0; top: 0; z-index: 2;
+    padding: calc(env(safe-area-inset-top) + 12px) 14px 0; display: flex; flex-direction: column; gap: 11px; }
+  .top-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .profile { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; flex: none;
+    border: 2px solid var(--pink); background: #333; box-shadow: 0 0 0 2px rgba(0,0,0,.35); }
+  .name-wrap { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+  .name { font-weight: 800; font-size: 18px; text-shadow: 0 1px 4px rgba(0,0,0,.7);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* ● LIVE ＋ 視聴者数（赤ドット＋LIVE＋同時視聴数、背景なしで映像に重ねる） */
+  .live-row { display: inline-flex; align-items: center; gap: 9px; min-width: 0; }
+  .live { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 800;
+    color: #fff; letter-spacing: .04em; text-shadow: 0 1px 3px rgba(0,0,0,.6); white-space: nowrap; }
+  .live::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #ff2d55;
+    box-shadow: 0 0 0 0 rgba(255,45,85,.7); animation: live-pulse 1.4s ease-out infinite; }
+  @keyframes live-pulse { 70% { box-shadow: 0 0 0 7px rgba(255,45,85,0); } 100% { box-shadow: 0 0 0 0 rgba(255,45,85,0); } }
+  @media (prefers-reduced-motion: reduce) { .live::before { animation: none; } }
+  .viewers { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700;
+    color: rgba(255,255,255,.92); text-shadow: 0 1px 3px rgba(0,0,0,.6); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .viewers svg { width: 14px; height: 14px; opacity: .92; flex: none; }
+  /* 右上のアクション（ハート＋音量） */
+  .top-actions { display: flex; align-items: center; gap: 8px; flex: none; }
+  .likes { display: inline-flex; align-items: center; gap: 6px; flex: none; padding: 7px 13px 7px 11px;
+    border-radius: 999px; background: rgba(0,0,0,.42); backdrop-filter: blur(6px); color: #fff; font-weight: 800; font-size: 15px;
+    font-variant-numeric: tabular-nums; text-shadow: 0 1px 2px rgba(0,0,0,.5); cursor: pointer; }
+  .likes .heart { width: 18px; height: 18px; color: #ff6b8a; flex: none; transition: transform .2s ease, color .2s ease; }
+  .likes .heart.on { color: #ff2d55; fill: #ff2d55; transform: scale(1.3); }
+  .likes:active .heart { transform: scale(.88); }
+  /* 右上の「登録する」ボタン（リンク先は設定可。空欄なら誘導のリンク先） */
+  .reg { display: inline-flex; align-items: center; gap: 4px; flex: none; padding: 8px 14px; border-radius: 999px;
+    background: var(--pink); color: #fff; font-weight: 800; font-size: 14px; text-decoration: none; white-space: nowrap;
+    box-shadow: 0 4px 14px var(--pink-glow); }
+  .reg:active { transform: translateY(1px); }
+  .sub-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+  .sub-row .reg { margin-left: auto; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag { font-size: 13px; font-weight: 800; padding: 6px 15px; border-radius: 999px;
+    background: #ff2d55; color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,.3); }
+  .tag:nth-child(even) { background: #2f7bff; }
+
+  .sound { flex: none; width: 40px; height: 40px; border-radius: 50%; background: rgba(0,0,0,.42); backdrop-filter: blur(6px);
+    display: grid; place-items: center; font-size: 17px; border: 1px solid rgba(255,255,255,.1); }
+  /* いいね誘導トースト */
+  .like-toast { position: absolute; top: calc(env(safe-area-inset-top) + 74px); left: 50%; transform: translateX(-50%); z-index: 6;
+    padding: 9px 16px; border-radius: 999px; background: rgba(0,0,0,.82); backdrop-filter: blur(6px); color: #fff;
+    font-size: 12.5px; font-weight: 700; white-space: nowrap; box-shadow: 0 6px 20px rgba(0,0,0,.45); animation: like-toast-in .25s ease; }
+  @keyframes like-toast-in { from { opacity: 0; transform: translate(-50%, -6px); } }
+
+  /* ===== 中央の誘導ダイアログ（画像の配置に準拠） ===== */
+  .cta { position: absolute; left: 20px; right: 20px; top: 50%; transform: translateY(-50%);
+    text-align: center; opacity: 0; transition: opacity .4s ease; pointer-events: none; z-index: 3; }
+  .cta.show { opacity: 1; pointer-events: auto; }
+  .cta h1 { font-size: clamp(21px, 5.8vw, 27px); font-weight: 900; line-height: 1.4; text-shadow: 0 2px 12px rgba(0,0,0,.85); }
+  .cta p { margin: 14px auto 0; max-width: 30em; font-size: 13.5px; line-height: 1.75; color: rgba(255,255,255,.82);
+    text-shadow: 0 1px 8px rgba(0,0,0,.9); }
+  .cta-choice { display: flex; gap: 14px; justify-content: center; margin-top: 26px; }
+  .cta-choice > * { flex: 1 1 0; max-width: 155px; padding: 16px 8px; border-radius: 16px; font-weight: 800; font-size: 17px;
+    text-decoration: none; text-align: center; transition: transform .12s ease, filter .12s ease; }
+  .cta-choice > *:active { transform: translateY(1px); }
+  .cta-no { background: rgba(0,0,0,.2); border: 1.5px solid rgba(255,255,255,.85); color: #fff; backdrop-filter: blur(4px); cursor: pointer; }
+  .cta-yes { background: var(--pink); color: #fff; border: 0; box-shadow: 0 8px 24px var(--pink-glow);
+    animation: pulse 1.8s ease-in-out infinite; }
+  .cta-yes:hover { filter: brightness(1.05); }
+  .cta-more { display: block; margin: 16px auto 0; max-width: 360px; padding: 17px 20px; border-radius: 16px;
+    background: rgba(0,0,0,.8); color: #fff; text-decoration: none; font-weight: 800; font-size: 16px;
+    backdrop-filter: blur(4px); box-shadow: 0 6px 20px rgba(0,0,0,.45); }
+  @keyframes pulse { 50% { transform: scale(1.03); } }
+  @media (prefers-reduced-motion: reduce) { .cta-yes { animation: none; } }
+
+  .footer { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 10px 16px calc(env(safe-area-inset-bottom) + 10px);
+    font-size: 10px; line-height: 1.5; color: rgba(255,255,255,.55); text-align: center;
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,.55)); pointer-events: none; }
+  /* 「スワイプで次へ」の案内（常に下へ進めることを示す。押しても次へ進む） */
+  .swipe-hint { position: absolute; right: 12px; bottom: calc(env(safe-area-inset-bottom) + 52px); z-index: 2;
+    display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 10px; border-radius: 16px;
+    background: rgba(0,0,0,.35); backdrop-filter: blur(4px); color: #fff; font-size: 11px; font-weight: 800;
+    text-shadow: 0 1px 3px rgba(0,0,0,.6); }
+  .swipe-hint svg { width: 22px; height: 22px; animation: swipe-bob 1.4s ease-in-out infinite; }
+  @keyframes swipe-bob { 50% { transform: translateY(-6px); } }
+  @media (prefers-reduced-motion: reduce) { .swipe-hint svg { animation: none; } }
+  .on-cta .swipe-hint { display: none; }
+  /* コメント入力欄（見に来た人もコメントできる風。送信すると登録の案内を出す） */
+  .cbar { position: absolute; left: 12px; right: 12px; bottom: calc(env(safe-area-inset-bottom) + 52px); z-index: 4;
+    display: flex; gap: 8px; align-items: center; }
+  .cbar input { flex: 1; min-width: 0; height: 42px; padding: 0 16px; border-radius: 999px; outline: none;
+    border: 1px solid rgba(255,255,255,.28); background: rgba(0,0,0,.45); backdrop-filter: blur(6px);
+    color: #fff; font: inherit; font-size: 16px; }
+  .cbar input::placeholder { color: rgba(255,255,255,.62); }
+  .cbar input:focus { border-color: var(--pink); background: rgba(0,0,0,.65); box-shadow: 0 0 0 3px var(--pink-glow); }
+  .cbar button { flex: none; height: 42px; padding: 0 18px; border-radius: 999px; background: var(--pink); color: #fff;
+    font-weight: 800; font-size: 14px; box-shadow: 0 4px 14px var(--pink-glow); }
+  .on-cta .cbar { display: none; }
+  .has-cbar .comments, .has-cbar .swipe-hint { bottom: calc(env(safe-area-inset-bottom) + 104px); }
+  /* 送信したときの「登録が必要です」案内 */
+  .reg-pop { position: absolute; inset: 0; z-index: 15; display: grid; place-items: center; padding: 20px;
+    background: rgba(0,0,0,.6); backdrop-filter: blur(4px); animation: like-toast-in .2s ease; }
+  .reg-box { position: relative; width: 100%; max-width: 340px; padding: 26px 20px 20px; border-radius: 20px; text-align: center;
+    background: #17171d; border: 1px solid rgba(255,255,255,.1); box-shadow: 0 20px 50px rgba(0,0,0,.5); }
+  .reg-close { position: absolute; top: 8px; right: 8px; width: 34px; height: 34px; border-radius: 50%; font-size: 16px;
+    color: rgba(255,255,255,.7); }
+  .reg-box h3 { font-size: 18px; font-weight: 900; line-height: 1.45; }
+  .reg-box p { margin-top: 8px; font-size: 13px; line-height: 1.7; color: var(--muted); }
+  .reg-mine { margin: 14px auto 0; max-width: 100%; padding: 8px 12px; border-radius: 14px; text-align: left;
+    background: rgba(255,255,255,.07); font-size: 13px; line-height: 1.5; word-break: break-word; }
+  .reg-mine::before { content: "あなたのコメント"; display: block; font-size: 10.5px; font-weight: 700; color: rgba(255,255,255,.5); margin-bottom: 2px; }
+  .reg-go { display: block; margin-top: 18px; padding: 15px 16px; border-radius: 14px; background: var(--pink); color: #fff;
+    font-weight: 800; font-size: 16px; text-decoration: none; box-shadow: 0 8px 24px var(--pink-glow); }
+  /* 誘導を最後のスライドに入れる（複数動画モード） */
+  .feed-mode.on-cta .comments { opacity: 0; }
+  /* ぼかし中に出す「ぼかしを外して見る」ボタン（押すと誘導を開く） */
+  .unblur { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 3;
+    display: inline-flex; align-items: center; gap: 8px; padding: 14px 22px; border-radius: 999px;
+    background: rgba(0,0,0,.55); backdrop-filter: blur(6px); border: 1.5px solid rgba(255,255,255,.85);
+    color: #fff; font-weight: 800; font-size: 16px; white-space: nowrap; box-shadow: 0 8px 24px rgba(0,0,0,.4);
+    animation: unblur-pulse 1.8s ease-in-out infinite; }
+  .unblur svg { width: 18px; height: 18px; flex: none; }
+  @keyframes unblur-pulse { 50% { transform: translate(-50%, -50%) scale(1.05); } }
+  @media (prefers-reduced-motion: reduce) { .unblur { animation: none; } }
+
+  /* ===== LIVEコメント ===== */
+  .comments { position: absolute; left: 12px; right: 30%; z-index: 2;
+    bottom: calc(env(safe-area-inset-bottom) + 48px);
+    display: flex; flex-direction: column; justify-content: flex-end; gap: 5px;
+    max-height: 26vh; overflow: hidden; pointer-events: none; transition: opacity .3s ease, max-height .35s ease;
+    -webkit-mask-image: linear-gradient(to top, #000 45%, transparent 100%);
+            mask-image: linear-gradient(to top, #000 45%, transparent 100%); }
+  .cmt { font-size: 12.5px; line-height: 1.4; padding: 6px 11px; border-radius: 14px;
+    color: #fff; background: rgba(20,20,28,.68); backdrop-filter: blur(6px);
+    max-width: 100%; word-break: break-word; letter-spacing: .01em;
+    opacity: 0; transform: translateY(8px); animation: cmt-in .35s ease forwards; }
+  .cmt .u { color: #7fd0ff; font-weight: 700; margin-right: 6px; }
+  .cmt.hi { background: linear-gradient(135deg, rgba(255,79,160,.92), rgba(130,80,255,.88)); color: #fff; }
+  .cmt.hi .u { color: #fff; }
+  @keyframes cmt-in { to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .cmt { animation: none; opacity: 1; transform: none; } }
+
+  /* ===== 年齢確認 ===== */
+  #age { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; padding: 16px;
+    background: rgba(0,0,0,.82); backdrop-filter: blur(14px); }
+  .age-box { width: 100%; max-width: 360px; text-align: center; padding: 28px 20px; border-radius: 20px;
+    background: #17171d; border: 1px solid rgba(255,255,255,.08); }
+  .age-box h2 { font-size: 20px; font-weight: 900; }
+  .age-box p { margin-top: 10px; font-size: 13px; line-height: 1.7; color: var(--muted); }
+  .age-actions { display: flex; gap: 12px; margin-top: 22px; }
+  .age-actions button, .age-actions a { flex: 1; padding: 14px 0; border-radius: 14px; font-weight: 800; text-align: center;
+    text-decoration: none; color: #fff; }
+  .age-no { border: 2px solid rgba(255,255,255,.7) !important; }
+  .age-yes { background: var(--pink); }
+
+  /* ===== PC表示（QR誘導） ===== */
+  #pc { position: fixed; inset: 0; display: grid; place-items: center; padding: 16px; overflow-y: auto;
+    background: radial-gradient(circle at 50% 30%, #2a1020 0%, var(--bg) 70%); }
+  .pc-box { display: flex; gap: 40px; align-items: center; max-width: 760px; }
+  .pc-phone { position: relative; width: 220px; aspect-ratio: 9/19; border-radius: 32px; overflow: hidden; flex: none;
+    border: 8px solid #222; box-shadow: 0 20px 60px rgba(0,0,0,.6); background: #000; }
+  /* PCでは <video> を画面に置かず canvas に描く → ピクチャーインピクチャ・右クリック保存ができない */
+  .pc-phone canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .pc-phone canvas.css-blur { transform: scale(1.15); }
+  .pc-text h2 { font-size: 26px; font-weight: 900; line-height: 1.4; }
+  .pc-text p { margin-top: 10px; color: var(--muted); font-size: 14px; line-height: 1.7; }
+  #qr { margin-top: 22px; display: inline-block; padding: 14px; border-radius: 16px; background: #fff; }
+  #qr img, #qr canvas { display: block; width: 180px; height: 180px; }
+  .pc-url { margin-top: 12px; font-size: 12px; color: var(--muted); word-break: break-all; }
+  @media (max-width: 700px) { .pc-box { flex-direction: column; text-align: center; gap: 24px; } }
+</style>
+</head>
+<body>
+
+<!-- 年齢確認 -->
+<div id="age" hidden>
+  <div class="age-box">
+    <h2>年齢確認</h2>
+    <p>このページには成人向けの内容が含まれます。<br>あなたは18歳以上ですか？</p>
+    <div class="age-actions">
+      <a class="age-no" href="https://www.google.com/">いいえ</a>
+      <button class="age-yes" id="age-yes" type="button">はい</button>
+    </div>
+  </div>
+</div>
+
+<!-- スマホ表示 -->
+<main id="sp" hidden>
+  <div class="media" id="media">
+    <video id="sp-video" autoplay muted loop playsinline preload="auto"
+      disablepictureinpicture disableremoteplayback x-webkit-airplay="deny"
+      controlslist="nodownload nofullscreen noremoteplayback noplaybackrate"></video>
+  </div>
+  <div class="feed" id="feed" hidden></div>
+  <div class="shade"></div>
+
+  <div class="top">
+    <div class="top-row">
+      <div class="profile">
+        <img class="avatar" id="avatar" alt="" hidden>
+        <div class="name-wrap">
+          <span class="name" id="name"></span>
+          <span class="live-row">
+            <span class="live">LIVE</span>
+            <span class="viewers">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              <span id="viewers">0</span>
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="likes" id="likes-btn" type="button" aria-label="いいね">
+          <svg class="heart" id="heart-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden><path d="M12 21s-7.3-4.6-10-9.3C.6 9 1.6 5.4 4.8 4.6 7 4 9 5 10 6.6c.4.7.6 1 2 1s1.6-.3 2-1C15 5 17 4 19.2 4.6c3.2.8 4.2 4.4 2.8 7.1C19.3 16.4 12 21 12 21z"/></svg>
+          <span id="likes">0</span>
+        </button>
+        <button class="sound" id="sound" type="button" aria-label="音声をオンにする">🔇</button>
+      </div>
+    </div>
+    <div class="sub-row">
+      <div class="tags" id="tags"></div>
+      <a class="reg" id="reg" rel="nofollow sponsored noopener" target="_blank">登録する</a>
+    </div>
+  </div>
+
+  <div class="like-toast" id="like-toast" hidden>ログインすることでいいねが反映されます</div>
+
+  <button class="unblur" id="unblur" type="button" hidden>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/></svg>
+    <span id="unblur-text">ぼかしを外して見る</span>
+  </button>
+
+  <button class="swipe-hint" id="swipe-hint" type="button" aria-label="次の動画へ">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden><path d="M6 14l6-6 6 6"/><path d="M6 20l6-6 6 6" opacity=".55"/></svg>
+    <span>スワイプ</span>
+  </button>
+
+  <section class="cta" id="cta">
+    <h1 id="heading"></h1>
+    <p id="desc"></p>
+    <div class="cta-choice">
+      <button class="cta-no" id="cta-no" type="button"></button>
+      <a class="cta-yes" id="cta-yes" rel="nofollow sponsored noopener" target="_blank"></a>
+    </div>
+    <a class="cta-more" id="cta-more" rel="nofollow sponsored noopener" target="_blank"></a>
+  </section>
+
+  <div class="comments" id="comments" hidden></div>
+  <form class="cbar" id="cbar" autocomplete="off" hidden>
+    <input type="text" id="cbar-input" maxlength="80" enterkeyhint="send" placeholder="コメントする…" aria-label="コメント">
+    <button type="submit">送信</button>
+  </form>
+  <div class="reg-pop" id="reg-pop" hidden>
+    <div class="reg-box" role="dialog" aria-modal="true" aria-labelledby="reg-pop-title">
+      <button class="reg-close" id="reg-close" type="button" aria-label="閉じる">✕</button>
+      <h3 id="reg-pop-title">コメントするには登録が必要です</h3>
+      <p id="reg-pop-desc"></p>
+      <div class="reg-mine" id="reg-mine" hidden></div>
+      <a class="reg-go" id="reg-go" rel="nofollow sponsored noopener" target="_blank">登録してコメントする</a>
+    </div>
+  </div>
+  <div class="footer" id="footer"></div>
+</main>
+
+<!-- PC表示 -->
+<div id="pc" hidden>
+  <div class="pc-box">
+    <div class="pc-phone"><canvas id="pc-canvas"></canvas></div>
+    <div class="pc-text">
+      <h2>このページはスマートフォン専用です</h2>
+      <p>スマホのカメラでQRコードを読み取ってアクセスしてください。</p>
+      <div id="qr"></div>
+      <div class="pc-url" id="pc-url"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var params = new URLSearchParams(location.search);
+  var cfg = JSON.parse($('lp-config').textContent);
+
+  // ?view=sp / ?view=pc で強制切替（確認用）
+  var forced = params.get('view');
+  var isPc = forced ? forced === 'pc' : !isMobileDevice();
+
+  // スマホ・タブレットかどうかを端末情報で判定する。
+  // （タッチ対応のWindowsノートなどもPC扱いにするため、画面幅やタッチ有無では判定しない）
+  function isMobileDevice() {
+    var uad = navigator.userAgentData;
+    if (uad && typeof uad.mobile === 'boolean' && uad.mobile) return true;
+    var ua = navigator.userAgent;
+    if (/iPhone|iPod|Android.+Mobile|Windows Phone|BlackBerry|Opera Mini|IEMobile/i.test(ua)) return true;
+    if (/iPad|Android(?!.*Mobile)|Silk|Kindle/i.test(ua)) return true; // タブレットもスマホ表示
+    // iPadOS は Mac と同じ UA を名乗るので、タッチ点数で見分ける
+    return /Macintosh/.test(ua) && navigator.maxTouchPoints > 1;
+  }
+
+  function store(key, val) {
+    try { if (val === undefined) return sessionStorage.getItem(key); sessionStorage.setItem(key, val); } catch (e) { return null; }
+  }
+  function blurPx(c) { return Math.round((Number(c.blurStrength) || 6) * 3.5) + 'px'; }
+
+  // どの動画を使うか。ぼかし済み動画があればそれを使い、なければ元動画をブラウザでぼかす。
+  function pickVideo(c, wantBlur) {
+    if (wantBlur && c.videoBlur) return { key: 'blur:' + c.videoBlur, src: c.videoBlur, cssBlur: null };
+    return { key: 'orig', src: c.video, cssBlur: wantBlur ? blurPx(c) : null };
+  }
+
+  document.addEventListener('contextmenu', function (e) {
+    if (e.target.tagName === 'VIDEO' || e.target.tagName === 'CANVAS') e.preventDefault();
+  });
+
+  // ================= PC =================
+  if (isPc) {
+    $('pc').hidden = false;
+    $('sp').remove();
+    params.delete('view');
+    var q = params.toString();
+    var url = cfg.pageUrl || (location.origin + location.pathname + (q ? '?' + q : ''));
+    $('pc-url').textContent = url;
+    if (window.QRCode) new QRCode($('qr'), { text: url, width: 360, height: 360, correctLevel: QRCode.CorrectLevel.M });
+
+    var canvas = $('pc-canvas'), ctx = canvas.getContext('2d');
+    var pv = document.createElement('video'); // DOM には追加しない
+    pv.muted = true; pv.loop = true; pv.playsInline = true; pv.autoplay = true;
+    pv.disablePictureInPicture = true;
+    var pcKey = null;
+
+    var applyPc = function (c) {
+      var v = pickVideo(c, true);
+      if (v.key !== pcKey) { pcKey = v.key; pv.src = v.src; pv.play().catch(function () {}); }
+      canvas.style.filter = v.cssBlur ? 'blur(' + v.cssBlur + ')' : '';
+      canvas.classList.toggle('css-blur', !!v.cssBlur);
+    };
+    var draw = function () {
+      var w = canvas.clientWidth, h = canvas.clientHeight, dpr = Math.min(window.devicePixelRatio || 1, 2);
+      if (canvas.width !== Math.round(w * dpr)) { canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr); }
+      if (pv.videoWidth) {
+        var s = Math.max(canvas.width / pv.videoWidth, canvas.height / pv.videoHeight);
+        var dw = pv.videoWidth * s, dh = pv.videoHeight * s;
+        ctx.drawImage(pv, (canvas.width - dw) / 2, (canvas.height - dh) / 2, dw, dh);
+      }
+      requestAnimationFrame(draw);
+    };
+    applyPc(cfg);
+    requestAnimationFrame(draw);
+    listenPreview(applyPc);
+    return;
+  }
+
+  // ================= スマホ =================
+  $('sp').hidden = false;
+  var video = $('sp-video');
+  var started = false, muted = true, activeVideo = video, videoEls = [video];
+  var mediaKey = '', feedObs = null;
+  var curCfg = cfg, stats = [], activeIdx = 0, cmtNext = null;
+  var ctaEl = $('cta'); // 誘導ダイアログ（DOMから外れても見失わないよう参照を固定）
+  // 誘導の表示／非表示。ぼかし中の「ぼかしを外して見る」ボタンは、誘導が出ていない時だけ出す
+  var ctaTimer = null;
+  function showCta() { clearTimeout(ctaTimer); ctaEl.classList.add('show'); updateUnblur(); fitComments(); }
+  // sec 秒後に誘導を出す（「いいえ」で閉じても、また出す）
+  function scheduleCta(sec) { clearTimeout(ctaTimer); ctaTimer = setTimeout(showCta, Math.max(0, Number(sec) || 0) * 1000); }
+  function repeatSec() { var n = Number(curCfg.ctaRepeatSec); return Number.isFinite(n) && n > 0 ? n : 10; }
+  function hideCta() { ctaEl.classList.remove('show'); updateUnblur(); fitComments(); }
+  // 誘導が出ている間は、コメント欄の上端を誘導の下端より下に収める（被らないように）
+  function fitComments() {
+    var box = $('comments');
+    if (!ctaEl.classList.contains('show')) { box.style.maxHeight = ''; return; }
+    var room = box.getBoundingClientRect().bottom - ctaEl.getBoundingClientRect().bottom - 16;
+    box.style.maxHeight = Math.max(56, Math.floor(room)) + 'px';
+  }
+  window.addEventListener('resize', fitComments);
+  function updateUnblur() {
+    var on = !!curCfg.blur && !ctaEl.classList.contains('show') && !$('sp').classList.contains('on-cta');
+    $('unblur').hidden = !on;
+  }
+  $('unblur').addEventListener('click', showCta);
+  function feedMode() { return $('sp').classList.contains('feed-mode'); }
+
+  function render(c, live) {
+    curCfg = c;
+    setupMedia(c);
+
+    var tags = $('tags'); tags.textContent = '';
+    (c.tags || []).forEach(function (t) {
+      var s = document.createElement('span'); s.className = 'tag'; s.textContent = t; tags.appendChild(s);
+    });
+    $('heading').textContent = c.heading || '';
+    $('desc').textContent = c.description || '';
+    $('desc').style.display = c.description ? '' : 'none';
+    var url = c.ctaUrl || '#';
+    $('cta-yes').textContent = c.yesText || 'はい';
+    $('cta-yes').href = url;
+    $('cta-no').textContent = c.noText || 'いいえ';
+    $('cta-more').textContent = c.ctaText || '';
+    $('cta-more').href = url;
+    $('cta-more').style.display = c.ctaText ? '' : 'none';
+    // 右上の登録ボタン：専用リンクがあればそれ、空欄なら誘導のリンク先
+    $('reg').hidden = c.regOn === false;
+    $('reg').textContent = c.regText || '登録する';
+    $('reg').href = c.regUrl || url;
+    // コメント入力欄：送信すると登録の案内（リンク先は登録ボタンと同じ）
+    var cbarOn = c.cbarOn !== false;
+    $('cbar').hidden = !cbarOn;
+    $('sp').classList.toggle('has-cbar', cbarOn);
+    $('cbar-input').placeholder = c.cbarPlaceholder || 'コメントする…';
+    $('reg-pop-title').textContent = c.cbarTitle || 'コメントするには登録が必要です';
+    $('reg-pop-desc').textContent = c.cbarDesc || '';
+    $('reg-pop-desc').hidden = !c.cbarDesc;
+    $('reg-go').textContent = c.cbarGo || '登録してコメントする';
+    $('reg-go').href = c.regUrl || url;
+    $('footer').textContent = c.footerNote || '';
+    applyComments(c);
+    paintStats(); // 名前・いいね数・視聴者数（動画ごと）
+    $('unblur-text').textContent = c.unblurText || 'ぼかしを外して見る';
+    if (live && started) showCta(); else updateUnblur();
+    fitComments();
+  }
+
+  // ---------- 動画ごとの名前・いいね数・視聴者数 ----------
+  function rndViewers() { return Math.floor(Math.random() * 7000) + 1000; } // 1,000〜7,999
+  function vName(i) {
+    var clip = curCfg.clips && curCfg.clips[i];
+    return (clip && clip.name) || curCfg.title || '';
+  }
+  function vLikes(i) {
+    var base = Number(curCfg.likes != null ? curCfg.likes : 1900);
+    var f = [1, 1.18, 0.85, 1.33, 0.72, 1.07, 0.92, 1.25, 0.8][i % 9]; // 動画ごとに固定でずらす
+    return Math.max(1, Math.round(base * f / 10) * 10);
+  }
+  // アイコン未設定のときの既定アイコン（人型シルエット＋ランダムな背景色）
+  function hashNum(s) { s = String(s); var h = 0; for (var i = 0; i < s.length; i++) { h = (h * 31 + s.charCodeAt(i)) >>> 0; } return h; }
+  function defaultAvatar(seed) {
+    var hue = hashNum(seed) % 360;
+    var bg = 'hsl(' + hue + ',42%,52%)';
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">' +
+      '<rect width="100" height="100" fill="' + bg + '"/>' +
+      '<circle cx="50" cy="39" r="16" fill="#d9d9df"/>' +
+      '<path d="M24 84c0-15 12-25 26-25s26 10 26 25z" fill="#d9d9df"/>' +
+      '</svg>';
+    return 'data:image/svg+xml,' + encodeURIComponent(svg);
+  }
+  function vAvatar(i) {
+    var clip = curCfg.clips && curCfg.clips[i];
+    if (clip && clip.avatar) return clip.avatar;
+    if (!curCfg.clips && curCfg.avatar) return curCfg.avatar; // 単動画の保険
+    return defaultAvatar(vName(i) || ('v' + i));
+  }
+  function activeName() { return vName(activeIdx); }
+  function paintStats() {
+    var st = stats[activeIdx]; if (!st) return;
+    $('name').textContent = vName(activeIdx);
+    $('likes').textContent = fmtK(vLikes(activeIdx));
+    $('viewers').textContent = fmtK(st.viewers);
+    $('avatar').hidden = false;
+    $('avatar').src = vAvatar(activeIdx);
+  }
+  function setActive(i) {
+    if (!stats[i]) return;
+    var changed = i !== activeIdx;
+    activeIdx = i;
+    paintStats();
+    if (changed) reseedComments(); // スクロール先の名前でコメントを入れ替える
+  }
+  function reseedComments() {
+    var box = $('comments');
+    if (!cmtNext || box.hidden) return;
+    box.textContent = '';
+    for (var i = 0; i < 4; i++) cmtNext();
+  }
+
+  // ---------- 動画（単動画／複数動画の縦スクロール） ----------
+  function clipSrc(c, clip, wantBlur) {
+    if (wantBlur && clip.videoBlur) return { src: clip.videoBlur, cssBlur: null };
+    return { src: clip.video, cssBlur: wantBlur ? blurPx(c) : null };
+  }
+  function tuneVideo(v) {
+    v.muted = muted; v.loop = true; v.playsInline = true; v.setAttribute('playsinline', '');
+    v.preload = 'auto'; v.disablePictureInPicture = true;
+    v.setAttribute('controlslist', 'nodownload nofullscreen noremoteplayback');
+  }
+  // clips の本数・ぼかしが変わったときだけ作り直す（テキスト編集の度には作り直さない）
+  function setupMedia(c) {
+    var clips = (c.clips && c.clips.length) ? c.clips : [{ video: c.video, videoBlur: c.videoBlur }];
+    var key = JSON.stringify([clips.length, !!c.blur, c.blurStrength]);
+    if (key === mediaKey) return;
+    mediaKey = key;
+    lastSlideIdx = -1;
+    var feed = $('feed'), media = $('media');
+    // 誘導ダイアログがフィード内にあると innerHTML='' で一緒に消えてしまうので、先に本体へ退避する
+    if (ctaEl.parentNode !== $('sp')) $('sp').insertBefore(ctaEl, $('comments'));
+    feed.innerHTML = '';
+
+    stats = clips.map(function () { return { viewers: rndViewers() }; });
+    activeIdx = 0;
+
+    // 縦スクロールフィード（動画が1本でも、下にスクロールすると誘導スライドへ進める）
+    $('sp').classList.add('feed-mode');
+    media.hidden = true; feed.hidden = false;
+    videoEls = [];
+    clips.forEach(function (clip, i) {
+      var slide = document.createElement('div'); slide.className = 'slide'; slide.dataset.i = i;
+      var sv = clipSrc(c, clip, !!c.blur);
+      var vid = document.createElement('video'); tuneVideo(vid);
+      vid.src = sv.src || '';
+      if (sv.cssBlur) { vid.style.filter = 'blur(' + sv.cssBlur + ')'; vid.className = 'css-blur'; }
+      slide.appendChild(vid); feed.appendChild(slide); videoEls.push(vid);
+    });
+    activeVideo = videoEls[0];
+    // 最後に暗い「誘導だけ」のスライド（ここまで来ると誘導を必ず表示）
+    var ctaSlide = document.createElement('div'); ctaSlide.className = 'slide cta-slide';
+    feed.appendChild(ctaSlide);
+    // スクロール位置から「今表示中のスライド」を判定（IntersectionObserver は環境により発火しないため）
+    feedScrollUpdate();
+    activeVideo.play().catch(function () {});
+  }
+
+  // フィードのスクロールで、表示中の動画・名前・数値・コメントを切り替える
+  var lastSlideIdx = -1;
+  function feedScrollUpdate() {
+    var feed = $('feed'); if (feed.hidden) return;
+    var h = feed.clientHeight; if (!h) return;
+    var idx = Math.round(feed.scrollTop / h);
+    if (idx === lastSlideIdx) return; // 同じスライドなら何もしない
+    lastSlideIdx = idx;
+    var slide = feed.children[idx]; if (!slide) return;
+    var isCta = slide.classList.contains('cta-slide');
+    $('sp').classList.toggle('on-cta', isCta);
+    if (isCta) showCta(); else updateUnblur();
+    var vid = slide.querySelector('video');
+    videoEls.forEach(function (x) { if (x !== vid) x.pause(); });
+    if (vid) { activeVideo = vid; vid.muted = muted; vid.play().catch(function () {}); }
+    if (!isCta) setActive(Number(slide.dataset.i));
+  }
+  $('feed').addEventListener('scroll', feedScrollUpdate, { passive: true });
+  // 「スワイプ」案内を押したら次のスライドへ
+  $('swipe-hint').addEventListener('click', function () {
+    var feed = $('feed'), h = feed.clientHeight; if (!h) return;
+    var next = feed.children[Math.round(feed.scrollTop / h) + 1];
+    if (next) next.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // 「いいえ」：誘導を閉じる。フィードの最後（誘導だけのスライド）にいる時は直前の動画へ戻す
+  $('cta-no').addEventListener('click', function () {
+    var onEnd = feedMode() && $('sp').classList.contains('on-cta');
+    scheduleCta(repeatSec()); // 閉じても、しばらくしたらまた出す
+    if (onEnd) {
+      var s = $('feed').children;
+      $('sp').classList.remove('on-cta');
+      lastSlideIdx = -1; // 次のスクロールで必ず判定し直す（再び最後まで来たら誘導を出す）
+      if (s.length >= 2) s[s.length - 2].scrollIntoView({ behavior: 'smooth' });
+    }
+    hideCta();
+  });
+
+  // コメントを送信 → 「登録が必要です」の案内を出す（実際には投稿しない）
+  $('cbar').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = $('cbar-input').value.trim();
+    $('cbar-input').blur();
+    $('reg-mine').textContent = v; $('reg-mine').hidden = !v;
+    $('reg-pop').hidden = false;
+  });
+  function closeRegPop() { $('reg-pop').hidden = true; }
+  $('reg-close').addEventListener('click', closeRegPop);
+  $('reg-pop').addEventListener('click', function (e) { if (e.target === this) closeRegPop(); });
+  $('reg-go').addEventListener('click', closeRegPop);
+
+  // 数値の表示（1000以上は 1.0k 形式）
+  function fmtK(n) { n = Math.round(Number(n) || 0); return n >= 1000 ? (n / 1000).toFixed(1) + 'k' : String(n); }
+
+  // ハートを押す → 一瞬ハートが埋まり、ログイン誘導のメッセージを出す（カウントは増やさない＝固定）
+  var likeToastTimer = null, heartTimer = null;
+  $('likes-btn').addEventListener('click', function () {
+    var ico = $('heart-ico'), toast = $('like-toast');
+    ico.classList.add('on');
+    clearTimeout(heartTimer); heartTimer = setTimeout(function () { ico.classList.remove('on'); }, 650);
+    toast.hidden = false;
+    clearTimeout(likeToastTimer); likeToastTimer = setTimeout(function () { toast.hidden = true; }, 1800);
+  });
+
+  // ---------- LIVEコメント ----------
+  // 設定の comments 配列からユーザー名と本文を別プールに分けて、ランダムに組み合わせて流す。
+  // 同じユーザー名や同じ本文が続けて出ないようシャッフルし、本文内の {name} は発言者名に置き換える。
+  var cmtTimer = null, cmtKey = '';
+  function applyComments(c) {
+    var box = $('comments');
+    var entries = (c.comments || [])
+      .map(function (x) { return typeof x === 'string' ? { text: x } : x; })
+      .filter(function (x) { return x && (x.text || x.user); });
+    var on = !!c.commentsOn && entries.length > 0;
+    box.hidden = !on;
+    if (!on) {
+      if (cmtTimer) { clearInterval(cmtTimer); cmtTimer = null; }
+      cmtKey = ''; box.textContent = '';
+      return;
+    }
+    var key = JSON.stringify([entries, c.commentsInterval]);
+    if (key === cmtKey) return;
+    cmtKey = key;
+    box.textContent = '';
+    if (cmtTimer) clearInterval(cmtTimer);
+
+    // 名前と本文を別プールに。重複は除く
+    var users = uniq(entries.map(function (x) { return x.user; }).filter(Boolean));
+    var texts = []; var seenText = {};
+    entries.forEach(function (x) {
+      if (!x.text) return;
+      var k = x.text + '\x00' + (x.highlight ? '1' : '0');
+      if (seenText[k]) return; seenText[k] = 1;
+      texts.push({ text: x.text, highlight: !!x.highlight });
+    });
+    if (!texts.length) return;
+    if (!users.length) users = ['ゲスト']; // 名前がゼロなら最低1つ入れる
+
+    var userQ = [], textQ = [];
+    var lastUser = '', lastText = '';
+    function refillUsers() { userQ = shuffle(users.slice()); }
+    function refillTexts() { textQ = shuffle(texts.slice()); }
+
+    function pickUser() {
+      if (!userQ.length) refillUsers();
+      var u = userQ.shift();
+      if (users.length > 1 && u === lastUser) { userQ.push(u); u = userQ.shift(); }
+      return (lastUser = u);
+    }
+    function pickText() {
+      if (!textQ.length) refillTexts();
+      var t = textQ.shift();
+      if (texts.length > 1 && t.text === lastText) { textQ.push(t); t = textQ.shift(); }
+      lastText = t.text; return t;
+    }
+
+    function next() {
+      var user = pickUser(), t = pickText();
+      var body = t.text.replace(/\{name\}/g, activeName()); // {name} は今映っている動画の名前に（スクロールで切替）
+      var el = document.createElement('div');
+      el.className = 'cmt' + (t.highlight ? ' hi' : '');
+      var u = document.createElement('span'); u.className = 'u'; u.textContent = user;
+      el.appendChild(u);
+      el.appendChild(document.createTextNode(body));
+      box.appendChild(el);
+      while (box.children.length > 7) box.removeChild(box.firstChild);
+    }
+    cmtNext = next; // スクロールで名前を入れ替えて再生成できるように
+
+    for (var i = 0; i < Math.min(4, texts.length); i++) next();
+    var ms = Math.max(600, Number(c.commentsInterval || 2.2) * 1000);
+    cmtTimer = setInterval(next, ms);
+  }
+  function uniq(arr) { var s = {}, r = []; arr.forEach(function (x) { if (!s[x]) { s[x] = 1; r.push(x); } }); return r; }
+  function shuffle(arr) { for (var i = arr.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = arr[i]; arr[i] = arr[j]; arr[j] = t; } return arr; }
+
+  $('sound').addEventListener('click', function () {
+    muted = !muted;
+    videoEls.forEach(function (v) { v.muted = muted; });
+    if (!muted && activeVideo) activeVideo.play().catch(function () {});
+    this.textContent = muted ? '🔇' : '🔊';
+    this.setAttribute('aria-label', muted ? '音声をオンにする' : '音声をオフにする');
+  });
+
+  // ---------- 視聴者数（動画ごと・テスト用のダミー表示） ----------
+  // 動画ごとに別の数値を持ち、3秒ごとに ±5 で変動。上限1万人、1000以上は 1.0k 形式。
+  setInterval(function () {
+    stats.forEach(function (st) {
+      st.viewers = Math.max(10, Math.min(10000, st.viewers + (Math.floor(Math.random() * 11) - 5)));
+    });
+    paintStats();
+  }, 3000);
+
+  function start() {
+    started = true;
+    (activeVideo || video).play().catch(function () {});
+    // 数秒後に動画の上へ誘導を出す
+    scheduleCta(cfg.ctaDelaySec);
+  }
+
+  render(cfg);
+  listenPreview(function (c) { render(c, true); });
+
+  if (cfg.ageGate && store('age-ok') !== '1') {
+    $('age').hidden = false;
+    $('age-yes').addEventListener('click', function () {
+      store('age-ok', '1');
+      $('age').hidden = true;
+      start();
+    });
+  } else {
+    start();
+  }
+
+  // 管理画面のプレビューから、保存前の設定を受け取って即反映する（同じオリジンからのみ）
+  function listenPreview(fn) {
+    if (window.parent === window) return;
+    window.addEventListener('message', function (e) {
+      if (e.origin !== location.origin || !e.data || e.data.type !== 'lp-preview') return;
+      fn(e.data.cfg);
+    });
+  }
+})();
+</script>
+</body>
+</html>
